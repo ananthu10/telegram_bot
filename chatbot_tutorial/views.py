@@ -76,7 +76,18 @@ def send_messages(message, token):
     result_message = {}         # the response needs to contain just a chat_id and text field for  telegram to accept it
     result_message['chat_id'] = message['chat_id']
     userData={}
-    userData['username']=message['from']['username']
+    checkUsername=True
+    try:
+        userData['username']=message['from']['username']
+    except KeyError:
+        id=message['chat_id']
+        data = {"chat_id":id,"text":"Create A Telegram username and try /start again" }
+        #data = {"chat_id":"752033724", "text":"Testing", "reply_markup": {"inline_keyboard": [[{"text":"fat"},{"text":"stupid", "url": "http://unofficed.com"},{"text":"dumb", "url": "http://unofficed.com"}]]} }
+        response_msg = json.dumps(data)
+        #   response_msg = json.dumps(result_message)
+        status = requests.post(post_message_url, headers={"Content-Type": "application/json"}, data=response_msg)
+        return HttpResponse()
+
     userData['chat_id']=message['chat_id']
     userData['data']=message['data']
     print( userData['data'])
