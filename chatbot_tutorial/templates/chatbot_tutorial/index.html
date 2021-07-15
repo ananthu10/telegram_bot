@@ -1,0 +1,25 @@
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>userName</th>
+      <th>fat joke count</th>
+      <th>stupid joke count</th>
+      <th>dumb joke count</th>
+
+    </tr>
+  </thead>
+  <tbody>
+      {% for row in Users %}
+          <tr> 
+                <th>{{loop.index0}}</th>
+                <td>{{row.userName}}</td>
+                <td>{{row.fat}}</td>
+                <td>{{row.stupid}}</td>
+                <td>{{row.dumb}}</td>
+  
+          </tr>
+      {% endfor %}
+  </tbody>
+</table>
